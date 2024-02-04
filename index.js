@@ -1,5 +1,5 @@
 
-
+//abstract class
 class Animal {
     constructor() {
         if (this.constructor === Animal) {
@@ -38,7 +38,6 @@ class Animal {
         throw new Error(`cannot call method directly.`)
     }
 }
-
 
 
 class Frog extends Animal {
@@ -81,6 +80,7 @@ class Frog extends Animal {
     #classification() {
         return {
             classification: {
+                name: this.constructor.name,
                 sound: this.sound(),
                 food: this.food(),
                 thermoregulation: this.thermoregulation(),
@@ -148,6 +148,7 @@ class Cat extends Animal {
     #classification() {
         return {
             classification: {
+                name: this.constructor.name,
                 sound: this.sound(),
                 food: this.food(),
                 thermoregulation: this.thermoregulation(),
@@ -174,5 +175,77 @@ class Cat extends Animal {
 }
 
 
-const frog = new Cat()
-console.log(frog.getClassification())
+class Butterfly extends Animal {
+    //private variables
+    #numberOfLegs = 6
+    #numberOfEyes = 2
+    #subPhylum = `Hexapoda`
+
+    constructor() {
+        super()
+    }
+    sound() {
+        return `click`
+    }
+    food() {
+        return `nectar from flowers`
+    }
+    thermoregulation() {
+        return `cold-blooded(poikilothermic)`
+    }
+    class() {
+        return `Insecta`
+    }
+    phylum() {
+        return `Arthropoda`
+    }
+    family() {
+        return `Nymphalidae`
+    }
+    order() {
+        return `Lepidoptera`
+    }
+    habitat() {
+        return `fields, pastures and gardens`
+    }
+    foodHabit() {
+        return `Herbivores`
+    }
+
+    //private method
+    #classification() {
+        return {
+            classification: {
+                name: this.constructor.name,
+                sound: this.sound(),
+                food: this.food(),
+                thermoregulation: this.thermoregulation(),
+                class: this.class(),
+                phylum: this.phylum(),
+                subphylum: this.#subPhylum,
+                family: this.family(),
+                order: this.order(),
+                habitat: this.habitat(),
+                foodHabit: this.foodHabit()
+            }
+        }
+    }
+
+    getClassification() {
+        return this.#classification()
+    }
+    getNumberOfEyes() {
+        return this.#numberOfEyes
+    }
+    getNumberOfLegs() {
+        return this.#numberOfLegs
+    }
+}
+
+const butterfly = new Butterfly()
+const frog = new Frog()
+const cat = new Cat()
+console.clear()
+console.log(butterfly.getClassification())
+// console.log(frog.getClassification())
+// console.log(cat.getClassification())
